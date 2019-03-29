@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java线程安全小结 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,线程安全," />
+  
+
+  <meta name="description" content="一、引言Java开发过程中许多的时候都会涉及到各种各样的并发编程的问题，然而说起并发编程总需要格外的关注线程安全的问题。最近呢一直在基于Jstorm开发日志处理程序，由于Jstorm的特性，多线程随处可见。所以程序中也需要特别关注线程安全的问题。这次项目开发过程也遇到了不少的问题，通过不断的查询资料，不断的修改问题也确实收获了不少的知识。因此写一下最近关于并发编程的学习和总结。">
+<meta name="keywords" content="技术,线程安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java线程安全小结">
+<meta property="og:url" content="http://hbyou.me/2016/05/13/Java线程安全小结/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="一、引言Java开发过程中许多的时候都会涉及到各种各样的并发编程的问题，然而说起并发编程总需要格外的关注线程安全的问题。最近呢一直在基于Jstorm开发日志处理程序，由于Jstorm的特性，多线程随处可见。所以程序中也需要特别关注线程安全的问题。这次项目开发过程也遇到了不少的问题，通过不断的查询资料，不断的修改问题也确实收获了不少的知识。因此写一下最近关于并发编程的学习和总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hbyou.me/images/20160513/bingfa1.jpg">
+<meta property="og:image" content="http://hbyou.me/images/20160513/bingfa2.jpg">
+<meta property="og:image" content="http://hbyou.me/images/20160513/bingfa3.jpg">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java线程安全小结">
+<meta name="twitter:description" content="一、引言Java开发过程中许多的时候都会涉及到各种各样的并发编程的问题，然而说起并发编程总需要格外的关注线程安全的问题。最近呢一直在基于Jstorm开发日志处理程序，由于Jstorm的特性，多线程随处可见。所以程序中也需要特别关注线程安全的问题。这次项目开发过程也遇到了不少的问题，通过不断的查询资料，不断的修改问题也确实收获了不少的知识。因此写一下最近关于并发编程的学习和总结。">
+<meta name="twitter:image" content="http://hbyou.me/images/20160513/bingfa1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Java线程安全小结" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Java线程安全小结</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.05.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>Java开发过程中许多的时候都会涉及到各种各样的并发编程的问题，然而说起并发编程总需要格外的关注线程安全的问题。最近呢一直在基于Jstorm开发日志处理程序，由于Jstorm的特性，多线程随处可见。所以程序中也需要特别关注线程安全的问题。这次项目开发过程也遇到了不少的问题，通过不断的查询资料，不断的修改问题也确实收获了不少的知识。因此写一下最近关于并发编程的学习和总结。<br><a id="more"></a></p>
+<h2 id="二、多线程基础"><a href="#二、多线程基础" class="headerlink" title="二、多线程基础"></a>二、多线程基础</h2><p>在并发编程中，线程和锁起着至关重要的作用，要完成健壮的并发程序就必须要正确的使用线程和锁。在我的实战过程中我觉得有两点需要我们特别的注意。</p>
+<ol>
+<li>对可变共享资源的操作</li>
+<li>当前的锁对象</li>
+</ol>
+<p>这两个地方不考虑清楚很容易写出线程不安全的代码。后面我会结合相关的示例来说明这一点。</p>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">共享资源：能够被多个线程同时访问的资源</span><br><span class="line">竞态条件：当两个线程竞争同一资源时，如果对资源的访问顺序敏感，就称存在竞态条件</span><br><span class="line">临界区：导致竞态条件发生的代码区</span><br></pre></td></tr></table></figure>
+<h3 id="什么是线程安全？"><a href="#什么是线程安全？" class="headerlink" title="什么是线程安全？"></a>什么是线程安全？</h3><p>在并发编程中我们最为关心的便是线程安全的问题。只有线程安全的程序在并发编程中才有用武之地。</p>
+<p>那么，到底什么是线程安全呢？</p>
+<blockquote>
+<p>当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么就称这个类时线程安全的。</p>
+</blockquote>
+<p>上面这句话给出了线程安全的一个定义，然而不同的实际场景这个正确的行为可能各不相同，需要我们开发去主观的判断。我在实战过程中往往会在每个操作执行过程中去考虑此时<strong>共享资源</strong>所处的状态,然后不断的测试代码的运行，查看中间过程共享资源的真实状态，从而实现出线程安全的代码。</p>
+<h2 id="三、关于线程安全的实战"><a href="#三、关于线程安全的实战" class="headerlink" title="三、关于线程安全的实战"></a>三、关于线程安全的实战</h2><p>上面概括的讲了一些基础的知识，接下来纪录下最近工作中遇到的问题。在基础中我强调了两个注意事项，在接下来的示例中我们就能够发现弄清楚代码中对共享资源的操作和当前同步中获得的所对象是什么对写出线程安全的代码的重要性。</p>
+<h3 id="字符串常量作为对象锁"><a href="#字符串常量作为对象锁" class="headerlink" title="字符串常量作为对象锁"></a>字符串常量作为对象锁</h3><p><img src="/images/20160513/bingfa1.jpg" alt=""><br>再次考虑两个注意点，第一，共享资源是什么；第二当前的对象锁是什么。<br>上图中的list集合即为共享资源，同步代码块中是对共享的操作。而当前的synchronized获取的锁则为字符串s。由于以上图中创建的字符串直接存储在jvm的常量池中，而且一个jvm中只保存一份。因此每个线程要想访问同步代码块中的代码都需要获得字符串s的锁。所以多个线程竞争同一个锁，从而到达每次只有一个线程可以访问同步代码块中的代码，即线程安全。</p>
+<p><img src="/images/20160513/bingfa2.jpg" alt=""><br>这次代码只改动了很小一部分，但是结果却是很出乎意料，现在这段代码编程了线程不安全的了。当时出现这个问题的时候我们也是有点意外。<br>遇到问题，首先判断哪些地方操作了共享资源list，检查整个代码发现只有图中的同步代码块中的代码。于是判断，共享资源的操作都在同步代码块中，共享资源的操作不是问题的关键。那边应该就是第二个条件对象锁出现了问题。对比图一的代码，图一之所以线程安全是因为所对象只有一个，每个线程去竞争同一个对象锁，从而保证同一时间只有一个线程执行同步代码块中的代码。所以猜测图二中的s对象不唯一，每个线程的锁住的对象各不相同，从而导致同一时间有多个线程执行了同步代码块中的代码。</p>
+<p>接下来我们看看图二中字节码反编译后的结果。</p>
+<p><img src="/images/20160513/bingfa3.jpg" alt=""><br>图中可以看到编译器对字符串操作符进行了处理，在用+连接两个字符串时编译器最终会通过StringBuilder的append方法拼接，最后通过调用toString方法获取字符串，因此不难理解这里每个线程都会new出自己的StringBuilder对象，所以这里每个线程获取的对象锁都是自己的StringBuilder对象，并没有去竞争同一个对象锁。从而造成了线程不安全的产生。</p>
+<p>上面这个示例主要是错误的锁对象的使用造成了线程不安全。</p>
+<h3 id="错用this关键字"><a href="#错用this关键字" class="headerlink" title="错用this关键字"></a>错用this关键字</h3><p>在使用同步的过程中经常会看到synchronized(this)的写法。此时应该要明白这里this的真正代表的含义。这里this表示当前对象，而synchronized(this)则表示需要需要获取当前对象的锁，才行访问同步代码块中的对象。<strong>因此synchronized(this)只适用多线程共用同一个实例</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncTest</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; listA = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; listB = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; listC = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; listD = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            List&lt;String&gt; list = <span class="keyword">null</span>;</span><br><span class="line">            TestEnum testEnum = TestEnum.getEnumByTime();</span><br><span class="line">            <span class="keyword">switch</span> (testEnum) &#123;</span><br><span class="line">                <span class="keyword">case</span> aaa:</span><br><span class="line">                    list = listA;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> bbb:</span><br><span class="line">                    list = listB;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> ccc:</span><br><span class="line">                    list = listC;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> ddd:</span><br><span class="line">                    list = listD;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">          </span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="comment">/*在多实例并发访问的时候会出现线程不安全的现象，</span></span><br><span class="line"><span class="comment">            因为每个实例竞争的对象锁不是同一个，但是static的变量所有实例共享</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">                list.add(Thread.currentThread().getName() + <span class="string">","</span></span><br><span class="line">                        + System.currentTimeMillis());</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (String a : list) &#123;</span><br><span class="line">                    System.out.println(a + <span class="string">",size = "</span> + list.size());</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>理论知识只有运用在实践过程中才能更加深刻更加透彻的被理解。在线程安全的问题出现时，搞清两个重点去排查问题的手段也非常的实用。并发编程的第一要务便是安全，在安全的基础之上才是性能。总之，最近基于Jstorm开发程序使自己多线程的理解又更加深了一些。在工作中深度学习点滴技术。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/04/24/链路层/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/06/04/ARP-RARP协议/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

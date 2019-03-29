@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>TCP/IP协议详解学习笔记（一、概述） | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,计算机网络,TCP/IP," />
+  
+
+  <meta name="description" content="工作一年来总感觉自己的基础知识非常的不扎实，当初在学校的学习的计算机网络知识都快全部还给老师了。最近总结自己这一年的技术沉淀，感觉少之又少。所以觉得重新扎实地学习下计算机网络知识非常必要。这一系列的文章也会持续的记录自己的学习过程。第一，记录下学习过程中关键知识点；第二，加深自己对知识的理解深度。">
+<meta name="keywords" content="技术,计算机网络,TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP协议详解学习笔记（一、概述）">
+<meta property="og:url" content="http://hbyou.me/2016/04/16/TCP-IP协议详解学习笔记（一、概述）/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="工作一年来总感觉自己的基础知识非常的不扎实，当初在学校的学习的计算机网络知识都快全部还给老师了。最近总结自己这一年的技术沉淀，感觉少之又少。所以觉得重新扎实地学习下计算机网络知识非常必要。这一系列的文章也会持续的记录自己的学习过程。第一，记录下学习过程中关键知识点；第二，加深自己对知识的理解深度。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hbyou.me/images/20160416/model.png">
+<meta property="og:image" content="http://hbyou.me/images/20160416/ip.png">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP&#x2F;IP协议详解学习笔记（一、概述）">
+<meta name="twitter:description" content="工作一年来总感觉自己的基础知识非常的不扎实，当初在学校的学习的计算机网络知识都快全部还给老师了。最近总结自己这一年的技术沉淀，感觉少之又少。所以觉得重新扎实地学习下计算机网络知识非常必要。这一系列的文章也会持续的记录自己的学习过程。第一，记录下学习过程中关键知识点；第二，加深自己对知识的理解深度。">
+<meta name="twitter:image" content="http://hbyou.me/images/20160416/model.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-TCP-IP协议详解学习笔记（一、概述）" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">TCP/IP协议详解学习笔记（一、概述）</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.04.16</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>工作一年来总感觉自己的基础知识非常的不扎实，当初在学校的学习的计算机网络知识都快全部还给老师了。最近总结自己这一年的技术沉淀，感觉少之又少。所以觉得重新扎实地学习下计算机网络知识非常必要。这一系列的文章也会持续的记录自己的学习过程。第一，记录下学习过程中关键知识点；第二，加深自己对知识的理解深度。<br><a id="more"></a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>很多不同的厂家生产各种型号的计算机，它们运行完全不同的操作系统，但TCP/IP协议族允许它们相互进行通讯。</p>
+</blockquote>
+<p>上面这句概括了TCP/IP协议族的作用。正式由于这个根本的特性，才有了我们繁荣的互联网的今天。实际使用中我们经常使用TCP/IP协议来表示TCP/IP协议族。而这里所说的TCP/IP协议其实是基于TCP和IP这两个主要协议的一组通信协议的集合。</p>
+<h2 id="TCP-IP网络模型"><a href="#TCP-IP网络模型" class="headerlink" title="TCP/IP网络模型"></a>TCP/IP网络模型</h2><p>网络协议通常分为不同层次进行开发，每一层分别负责不同的通信功能。一个协议族则是一组不同层次上的多个协议的组合。在计算网络中最为常见的两个网络模型分别为：OSI七层网络模型和TCP/IP的四层网络模型。下图TCP/IP模型及各层功能的一个概述。</p>
+<p><img src="/images/20160416/model.png" alt=""></p>
+<h2 id="一些网络术语的解释"><a href="#一些网络术语的解释" class="headerlink" title="一些网络术语的解释"></a>一些网络术语的解释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">互联网：也称网际网络，多个网络通过一组相同协议族互联在一起的网络。</span><br><span class="line">Internet：因特网，又叫国际互联网。世界范围内通过TCP/IP互相痛心的所有主机集合。</span><br><span class="line">internet：泛指互联网。</span><br><span class="line">路由器：一种特殊的用于网络互联的硬件盒。也称作IP路由器。它负责两个网络之间的连接（网络层上对网络进行互联），能够为两个不同类型的物理网络提供连接。</span><br><span class="line">网关：现在网关只用来表示应用层网关，用于连接两种不同协议族的进程。为某个特定的应用程序服务。</span><br><span class="line">网桥：也叫桥接器，是连接两个局域网的一种存储／转发设备（链路层上对网络层进行互联），它能将一个大的LAN分割为多个网段，或将两个以上的LAN互联为一个逻辑LAN，使LAN上的所有用户都可访问服务器。</span><br><span class="line">局域网：LAN，是指在某一区域内由多台计算机互联成的计算机组。一般是方圆几千米以内。</span><br><span class="line">广域网：WAN，也称远程网。通常跨接很大的物理范围，所覆盖的范围从几十公里到几千公里，它能连接多个城市或国家，或横跨几个洲并能提供远距离通信，形成国际性的远程网络。</span><br></pre></td></tr></table></figure>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p>互联网上的每个接口必须有一个唯一的IP地址。IP地址长32bit（4byte）。其分为A、B、C、D、E五类。<img src="/images/20160416/ip.png" alt=""><br>这些32位的地址通常写成四个十进制的数，其中每个整数对应一个字节。这种表示方法称作的“点分十进制表示法”。区分各类地址的最简单方法是看它的第一个十进制整数。</p>
+<p>IP地址是全世界唯一的接口标识。互联网信息中心（InterNIC）负责IP地址的分配。不过InterNIC只分配网络号。主机号的分配由系统管理员来负责。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>端口包括物理端口和逻辑端口。物理端口是用于连接物理设备之间的接口，逻辑端口是逻辑上用于区分服务的端口。TCP/IP协议中的端口就是逻辑端口，通过不同的逻辑端口来区分不同的服务。一个IP地址的端口通过16bit进行编号，最多可以有65536个端口。端口是通过端口号来标记的，端口号只有整数，范围是从0 到65535。</p>
+<p>对于每个TCP/IP实现来说，FTP服务器的TCP端口号都是21，Telnet服务器的TCP端口号都是23，TFTP服务器的UDP端口号都是69。任何TCP/IP实现所提供的服务都用知名的1-1023之间的端口号。这些知名端口号由Internet号分配机构（IANA）来管理。大多数TCP/IP实现给临时端口分配1024-5000之间的端口号。大于5000的端口号为其他服务器预留。</p>
+<h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><p>域名系统（Domain Name System缩写DNS）是因特网的一项核心服务，它作为可以将域名和IP地址相互映射的一个分布式数据库，能够使人更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。大多数使用主机名作为参数的应用程序也可以把IP地址作为参数。例如，使用Telnet进行远程登录时，既可以指定一个主机名，也可以指定一个IP地址。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/03/04/计算广告术语/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/04/24/链路层/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

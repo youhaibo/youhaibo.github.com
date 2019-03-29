@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>工作常用Linux命令 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Linux," />
+  
+
+  <meta name="description" content="磁盘 显示磁盘总空间和可用空间  1df -h  当前目录下一级目录的磁盘占用情况  1du --max-depth=1 -h 时间 获取当前时间  1date &quot;+%Y-%m-%d %H:%M:%S&quot;  获取当前时间戳：  12345current=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`timeStamp=`date -d &quot;$current&quot; +%s`#将current转换为时">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作常用Linux命令">
+<meta property="og:url" content="http://hbyou.me/2019/03/18/工作常用Linux命令/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="磁盘 显示磁盘总空间和可用空间  1df -h  当前目录下一级目录的磁盘占用情况  1du --max-depth=1 -h 时间 获取当前时间  1date &quot;+%Y-%m-%d %H:%M:%S&quot;  获取当前时间戳：  12345current=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`timeStamp=`date -d &quot;$current&quot; +%s`#将current转换为时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="工作常用Linux命令">
+<meta name="twitter:description" content="磁盘 显示磁盘总空间和可用空间  1df -h  当前目录下一级目录的磁盘占用情况  1du --max-depth=1 -h 时间 获取当前时间  1date &quot;+%Y-%m-%d %H:%M:%S&quot;  获取当前时间戳：  12345current=`date &quot;+%Y-%m-%d %H:%M:%S&quot;`timeStamp=`date -d &quot;$current&quot; +%s`#将current转换为时">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-工作常用Linux命令" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">工作常用Linux命令</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.03.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><ul>
+<li>显示磁盘总空间和可用空间</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当前目录下一级目录的磁盘占用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h</span><br></pre></td></tr></table></figure>
+<h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><ul>
+<li>获取当前时间</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date "+%Y-%m-%d %H:%M:%S"</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取当前时间戳：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">current=`date "+%Y-%m-%d %H:%M:%S"`</span><br><span class="line">timeStamp=`date -d "$current" +%s`</span><br><span class="line"><span class="meta">#</span>将current转换为时间戳，精确到毫秒  </span><br><span class="line">currentTimeStamp=$((timeStamp*1000+`date "+%N"`/1000000))</span><br><span class="line">echo $currentTimeStamp</span><br></pre></td></tr></table></figure>
+<h1 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h1><ul>
+<li>跨机远程拷贝</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、本地文件复制到远程</span><br><span class="line">scp local_file remote_username@remote_ip:remote_folder</span><br><span class="line">2、本地目录复制到远程</span><br><span class="line">scp -r local_folder remote_username@remote_ip:remote_folder</span><br><span class="line">3、远程文件复制到本地</span><br><span class="line">scp remote_username@remote_ip:remote_folder/file local_folder</span><br><span class="line">4、远程目录复制到本地</span><br><span class="line">scp -r remote_username@remote_ip:remote_folder local_folder</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解压缩</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、zip</span><br><span class="line">zip aaa.zip aaa</span><br><span class="line">unzip aaa.zip</span><br><span class="line"></span><br><span class="line">2、tar</span><br><span class="line">tar cvf aaa.tar aaa</span><br><span class="line">tar xvf aaa.tar</span><br></pre></td></tr></table></figure>
+<h1 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h1><ul>
+<li>新增用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1、创建用户名，密码</span><br><span class="line">ftp.virtual.users.list中写入用户名和密码</span><br><span class="line">2、配置用户权限</span><br><span class="line">/etc/vsftpd/vsftpd_user_conf 文件中配置权限</span><br><span class="line">write_enable=YES</span><br><span class="line">anon_umask=022</span><br><span class="line">anon_world_readable_only=NO</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line">local_root=/xxx/vsftpd/yyyy</span><br><span class="line">3、重启</span><br><span class="line">db_load -T -t hash -f /home/ftp.virtual.users.list /etc/vsftpd/vsftpd_login.db</span><br><span class="line">service vsftpd restart</span><br></pre></td></tr></table></figure>
+<h1 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h1><ul>
+<li>chown</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown user:group file</span><br></pre></td></tr></table></figure>
+<ul>
+<li>chmod</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1、参数</span><br><span class="line">-c 当发生改变时，报告处理信息</span><br><span class="line">-f 错误信息不输出</span><br><span class="line">-R 处理指定目录以及其子目录下的所有文件</span><br><span class="line">-v 运行时显示详细处理信息</span><br><span class="line"></span><br><span class="line">2、权限范围</span><br><span class="line">u ：目录或者文件的当前的用户</span><br><span class="line">g ：目录或者文件的当前的群组</span><br><span class="line">o ：除了目录或者文件的当前用户或群组之外的用户或者群组</span><br><span class="line">a ：所有的用户及群组</span><br><span class="line"></span><br><span class="line">3、权限代号</span><br><span class="line">r ：读权限，用数字4表示</span><br><span class="line">w ：写权限，用数字2表示</span><br><span class="line">x ：执行权限，用数字1表示</span><br><span class="line">- ：删除权限，用数字0表示</span><br><span class="line">s ：特殊权限 </span><br><span class="line"></span><br><span class="line">4、使用</span><br><span class="line">chmod 751 file</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>说明</span><br><span class="line">给file的属主分配读、写、执行(7)的权限，给file的所在组分配读、执行(5)的权限，给其他用户分配执行(1)的权限</span><br></pre></td></tr></table></figure>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>lsof -i:7001</p>
+<p>curl -d “user=admin&amp;passwd=12345678” <a href="http://127.0.0.1:8080/login" target="_blank" rel="noopener">http://127.0.0.1:8080/login</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/07/29/JVM笔记（二）：HotSpot对象创建、布局和访问/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

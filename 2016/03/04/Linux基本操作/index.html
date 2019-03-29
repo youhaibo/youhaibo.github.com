@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux基本操作 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,Linux," />
+  
+
+  <meta name="description" content="###一，日期和时间  1，date 查看和设置系统的日期和时间 2，-u，来查看UTC时间（格林威治时间）">
+<meta name="keywords" content="技术,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基本操作">
+<meta property="og:url" content="http://hbyou.me/2016/03/04/Linux基本操作/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="###一，日期和时间  1，date 查看和设置系统的日期和时间 2，-u，来查看UTC时间（格林威治时间）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基本操作">
+<meta name="twitter:description" content="###一，日期和时间  1，date 查看和设置系统的日期和时间 2，-u，来查看UTC时间（格林威治时间）">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Linux基本操作" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Linux基本操作</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.03.04</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/操作系统/">操作系统</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>###一，日期和时间</p>
+<hr>
+<p>1，date 查看和设置系统的日期和时间</p>
+<p>2，-u，来查看UTC时间（格林威治时间）</p>
+<a id="more"></a>
+<p>3，date +%y–%m–%d 其中“–”可以自定义更改，这是更改时间的显示格式</p>
+<p>4，date -s 设置时间，这个需要切到root用户才能有权限更改</p>
+<p>5，date查看的是操作系统的时间，他是从硬件的时间中来的，可以直接用clock（hclcok）来查看</p>
+<p>6，cal来打印日历</p>
+<p>7，uptime，用来查看系统运行了多久，系统的用户，系统的负载</p>
+<p>注：可以用 man uptime来查看对uptime的解释</p>
+<p>###二，输出，查看命令</p>
+<hr>
+<p>1，echo:显示输入的内容，你输的啥就给你输出啥</p>
+<p>2，cat：来显示文件的内容，它直接显示出所有的文件内容，很不人性化，麻烦</p>
+<p>3，为了方便查看，避免cat的不便，可以用已下几个命令</p>
+<p>4，more：用于翻页显示内容，但是不能向下翻页</p>
+<p>5，less：相对于more 可以上下来回翻页</p>
+<p>6，head：显示文件的头几行（默认10行）</p>
+<p>-n:来指定显示开头的n行</p>
+<p>7，tail:显示末尾的几行（默认10行）</p>
+<p>-n:来指定显示末尾的n行</p>
+<p>-f:追踪显示文件的更新，当我们用-f指令后，命令行就会卡在这里，等待文件更新再显示出新内容。一般用于查看日志，持续显示新加入的内容</p>
+<p>###三，查看硬件信息</p>
+<hr>
+<p>1，lspci 用于查看PCI设备（如声卡网卡等）</p>
+<p>-v查看详细信息</p>
+<p>这几条命令相当与Windows中点属性点设备管理器一样</p>
+<p>2，lsusb 查看USB设备，如摄像头等</p>
+<p>-v也是显示详细信息</p>
+<p>3，lsmod 查看当前加载的所有模块（模块即windows中相当于驱动）</p>
+<p>###四，关机重启</p>
+<hr>
+<p>格式：shutdown【关机/重启】时间</p>
+<p>立即关机：shutdown -h now=poweroff</p>
+<p>立即重启：shutdown -r now=reboot</p>
+<p>n分钟后关机：shutdown -h +n</p>
+<p>定时关机：shutdown -h xx:xx</p>
+<p>###五，归档和压缩</p>
+<hr>
+<p>1，zip用以压缩：zip xxx.zip file (把file这个源文件压缩成xxx.zip是目标文件）</p>
+<p>2，unzip xxx.zip 是解压文件</p>
+<p>3，gzip:也是一种压缩方式</p>
+<p>4，tar：一个归档命令，就是把许多文件打包成一个文件</p>
+<p>-cvf out.tar liunxfile :把Linuxfile这个文件夹中的文件打包归档成一个输出out.tar格式的文件，可以用来备份，但是他没有压缩哦</p>
+<p>-cvf out.tar 把一个归档的tar文件释放到当前文件下</p>
+<p>-cvzf: 在cvf命令下多了个z命令，就是归档并压缩一个文件。这里调用了一次gzip命令</p>
+<p>格式：tar -cvzf xxx.tar.gz/要保存的目录下</p>
+<p>其实用的最多的还是归档并压缩命令</p>
+<p>解压：tar -zxvf FileName.tar.gz</p>
+<p>压缩：tar -zcvf FileName.tar.gz DirName</p>
+<p>###六，查找命令(查找文件、文件夹)</p>
+<hr>
+<p>在我们的操作系统中寻找文件</p>
+<p>1，lacate 关键字 快速查找</p>
+<p>它需要预先建立数据库，比如你新建立了一个文件，然后用locate去查找这个命令，是找不到的(数据库每天更新一次)。这个时候你可以用“updatedb”命令先更新数据库，然后在查找。</p>
+<p>2，find 支持很多查找条件，所以叫高级查找</p>
+<p>格式：find 查找位置 查找参数</p>
+<p>find .-name<em>linuxcast</em> “.”表示在当前文件夹 *代表0个或多个字符 -name 表示查找文件、文件夹的名字</p>
+<p>xxx表示关键字这句话表示在当前文件夹下所有包含“Linuxcast”关键字的文件</p>
+<p>find / -name *.conf 在/根分区下查找所有.conf结尾的文件</p>
+<p>find / -perm 777查找硬盘中所有权限是777的文件</p>
+<p>find / -type d 查找目录类型文件。d 表示目录，也可以跟l ，表示查找所有的连接</p>
+<p>find还可以使用查找的结果去执行一些命令。</p>
+<p>find .-name “a *” -exec ls -l {} \;<br>这句话表示查找所有以“a开头的文件，然后传送给“ls -l”这个命令去执行,显示详细信息。</p>
+<p>其中{} \;是固定格式。</p>
+<p>-exec也是固定格式，执行的意思；</p>
+<p>find的后缀参数还有很多，可以直接在网络查找或者help文件</p>
+<p>3，grep -H ‘spring’ *.xml 查找所以有的包含spring的xml文件</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/03/04/IDEA使用文档（mac-os-10-11-3）/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/03/04/计算广告术语/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

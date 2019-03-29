@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-tag线程安全">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tag: 线程安全 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,软件架构,计算机技术,互联网技术,hexo,个人博客,youhaibo,youqi,youqi.yhb" />
+  
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="youqi&#39;s blog">
+<meta property="og:url" content="http://hbyou.me/tag/线程安全/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="youqi&#39;s blog">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="content content-tag">
+  <div class="page-header">
+
+  
+    <div class="breadcrumb">
+      <div class="location">标签</div>
+      <i class="icon-location"></i>
+    </div>
+  
+
+  
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+  <div class="box-blog-info">
+    <a class="avatar" href="/">
+      <img src="/images/avatar.jpeg" alt="" />
+    </a>
+    <div class="info">
+      <h3 class="name" style="font-family: calligraffittiregular">
+        尤淇的个人博客
+      </h3>
+      <div class="slogan">
+        快乐工作、认真生活！
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <section class="tag-box">
+  <div class="tag-title">标签</div>
+  <div class="tag-list">
+    
+      <a class="tag-item" href="#Flink">
+        <span class="tag-name">Flink</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#HBase">
+        <span class="tag-name">HBase</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#JVM">
+        <span class="tag-name">JVM</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#KMP">
+        <span class="tag-name">KMP</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#Linux">
+        <span class="tag-name">Linux</span>
+        <span class="tag-size">( 2 )</span>
+      </a>
+    
+      <a class="tag-item" href="#Log">
+        <span class="tag-name">Log</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#POI">
+        <span class="tag-name">POI</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#Sundy">
+        <span class="tag-name">Sundy</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#TCP/IP">
+        <span class="tag-name">TCP/IP</span>
+        <span class="tag-size">( 2 )</span>
+      </a>
+    
+      <a class="tag-item" href="#leetcode">
+        <span class="tag-name">leetcode</span>
+        <span class="tag-size">( 3 )</span>
+      </a>
+    
+      <a class="tag-item" href="#字符串匹配">
+        <span class="tag-name">字符串匹配</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#技术">
+        <span class="tag-name">技术</span>
+        <span class="tag-size">( 14 )</span>
+      </a>
+    
+      <a class="tag-item" href="#排序">
+        <span class="tag-name">排序</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#算法">
+        <span class="tag-name">算法</span>
+        <span class="tag-size">( 6 )</span>
+      </a>
+    
+      <a class="tag-item" href="#线程安全">
+        <span class="tag-name">线程安全</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#计算广告">
+        <span class="tag-name">计算广告</span>
+        <span class="tag-size">( 1 )</span>
+      </a>
+    
+      <a class="tag-item" href="#计算机网络">
+        <span class="tag-name">计算机网络</span>
+        <span class="tag-size">( 2 )</span>
+      </a>
+    
+      <a class="tag-item" href="#随笔">
+        <span class="tag-name">随笔</span>
+        <span class="tag-size">( 2 )</span>
+      </a>
+    
+  </div>
+</section>
+
+  <ul class="list-post"><li id="Flink" class="item-category-name item-title item-title-0">
+  <!--
+    <a href="" class="text-year">
+   -->
+    Flink
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">07-11</span>
+
+  
+  <a class="post-title" href="/2017/07/11/Flink-MAC本地模式搭建/">Flink-MAC本地模式搭建</a>
+
+
+</li>
+<li id="HBase" class="item-category-name item-title item-title-1">
+  <!--
+    <a href="" class="text-year">
+   -->
+    HBase
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-25</span>
+
+  
+  <a class="post-title" href="/2015/04/25/单机HBase搭建/">单机HBase搭建</a>
+
+
+</li>
+<li id="JVM" class="item-category-name item-title item-title-2">
+  <!--
+    <a href="" class="text-year">
+   -->
+    JVM
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">07-23</span>
+
+  
+  <a class="post-title" href="/2018/07/23/JVM笔记（一）：运行时数据区域/">JVM笔记（一）：运行时数据区域</a>
+
+
+</li>
+<li id="KMP" class="item-category-name item-title item-title-3">
+  <!--
+    <a href="" class="text-year">
+   -->
+    KMP
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之KMP算法/">字符串匹配算法之KMP算法</a>
+
+
+</li>
+<li id="Linux" class="item-category-name item-title item-title-4">
+  <!--
+    <a href="" class="text-year">
+   -->
+    Linux
+    <span class="category-count">( 2 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">03-18</span>
+
+  
+  <a class="post-title" href="/2019/03/18/工作常用Linux命令/">工作常用Linux命令</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">03-04</span>
+
+  
+  <a class="post-title" href="/2016/03/04/Linux基本操作/">Linux基本操作</a>
+
+
+</li>
+<li id="Log" class="item-category-name item-title item-title-0">
+  <!--
+    <a href="" class="text-year">
+   -->
+    Log
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">06-18</span>
+
+  
+  <a class="post-title" href="/2016/06/18/Java主流日志工具介绍和使用/">Java主流日志工具介绍和使用</a>
+
+
+</li>
+<li id="POI" class="item-category-name item-title item-title-1">
+  <!--
+    <a href="" class="text-year">
+   -->
+    POI
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">10-26</span>
+
+  
+  <a class="post-title" href="/2014/10/26/POI学习笔记/">POI学习笔记</a>
+
+
+</li>
+<li id="Sundy" class="item-category-name item-title item-title-2">
+  <!--
+    <a href="" class="text-year">
+   -->
+    Sundy
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之Sunday算法/">字符串匹配算法之Sunday算法</a>
+
+
+</li>
+<li id="TCP/IP" class="item-category-name item-title item-title-3">
+  <!--
+    <a href="" class="text-year">
+   -->
+    TCP/IP
+    <span class="category-count">( 2 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-24</span>
+
+  
+  <a class="post-title" href="/2016/04/24/链路层/">TCP/IP协议详解学习笔记(二、链路层)</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-16</span>
+
+  
+  <a class="post-title" href="/2016/04/16/TCP-IP协议详解学习笔记（一、概述）/">TCP/IP协议详解学习笔记（一、概述）</a>
+
+
+</li>
+<li id="leetcode" class="item-category-name item-title item-title-4">
+  <!--
+    <a href="" class="text-year">
+   -->
+    leetcode
+    <span class="category-count">( 3 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">02-27</span>
+
+  
+  <a class="post-title" href="/2017/02/27/Leetcode-3-Longest-Substring-Without-Repeating-Characters/">Leetcode-3. Longest Substring Without Repeating Characters</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">02-25</span>
+
+  
+  <a class="post-title" href="/2017/02/25/Leetcode-2-Add-Two-Numbers/">Leetcode-2. Add Two Numbers</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">02-25</span>
+
+  
+  <a class="post-title" href="/2017/02/25/Leetcode-1-Two-Sum/">Leetcode-1. Two Sum</a>
+
+
+</li>
+<li id="字符串匹配" class="item-category-name item-title item-title-0">
+  <!--
+    <a href="" class="text-year">
+   -->
+    字符串匹配
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之Sunday算法/">字符串匹配算法之Sunday算法</a>
+
+
+</li>
+<li id="技术" class="item-category-name item-title item-title-1">
+  <!--
+    <a href="" class="text-year">
+   -->
+    技术
+    <span class="category-count">( 14 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">06-18</span>
+
+  
+  <a class="post-title" href="/2016/06/18/Java主流日志工具介绍和使用/">Java主流日志工具介绍和使用</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">06-04</span>
+
+  
+  <a class="post-title" href="/2016/06/04/ARP-RARP协议/">ARP/RARP协议</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">05-13</span>
+
+  
+  <a class="post-title" href="/2016/05/13/Java线程安全小结/">Java线程安全小结</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-24</span>
+
+  
+  <a class="post-title" href="/2016/04/24/链路层/">TCP/IP协议详解学习笔记(二、链路层)</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-16</span>
+
+  
+  <a class="post-title" href="/2016/04/16/TCP-IP协议详解学习笔记（一、概述）/">TCP/IP协议详解学习笔记（一、概述）</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">03-04</span>
+
+  
+  <a class="post-title" href="/2016/03/04/计算广告术语/">计算广告术语</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">03-04</span>
+
+  
+  <a class="post-title" href="/2016/03/04/Linux基本操作/">Linux基本操作</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">03-04</span>
+
+  
+  <a class="post-title" href="/2016/03/04/IDEA使用文档（mac-os-10-11-3）/">IDEA使用文档（mac os 10.11.3）</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-25</span>
+
+  
+  <a class="post-title" href="/2015/04/25/单机HBase搭建/">单机HBase搭建</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-17</span>
+
+  
+  <a class="post-title" href="/2015/04/17/快速排序算法/">快速排序算法</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之KMP算法/">字符串匹配算法之KMP算法</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之Sunday算法/">字符串匹配算法之Sunday算法</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">12-09</span>
+
+  
+  <a class="post-title" href="/2014/12/09/Velocity学习笔记/">Velocity学习笔记</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">10-26</span>
+
+  
+  <a class="post-title" href="/2014/10/26/POI学习笔记/">POI学习笔记</a>
+
+
+</li>
+<li id="排序" class="item-category-name item-title item-title-2">
+  <!--
+    <a href="" class="text-year">
+   -->
+    排序
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-17</span>
+
+  
+  <a class="post-title" href="/2015/04/17/快速排序算法/">快速排序算法</a>
+
+
+</li>
+<li id="算法" class="item-category-name item-title item-title-3">
+  <!--
+    <a href="" class="text-year">
+   -->
+    算法
+    <span class="category-count">( 6 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">02-27</span>
+
+  
+  <a class="post-title" href="/2017/02/27/Leetcode-3-Longest-Substring-Without-Repeating-Characters/">Leetcode-3. Longest Substring Without Repeating Characters</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">02-25</span>
+
+  
+  <a class="post-title" href="/2017/02/25/Leetcode-2-Add-Two-Numbers/">Leetcode-2. Add Two Numbers</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">02-25</span>
+
+  
+  <a class="post-title" href="/2017/02/25/Leetcode-1-Two-Sum/">Leetcode-1. Two Sum</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-17</span>
+
+  
+  <a class="post-title" href="/2015/04/17/快速排序算法/">快速排序算法</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之KMP算法/">字符串匹配算法之KMP算法</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-09</span>
+
+  
+  <a class="post-title" href="/2015/04/09/字符串匹配算法之Sunday算法/">字符串匹配算法之Sunday算法</a>
+
+
+</li>
+<li id="线程安全" class="item-category-name item-title item-title-4">
+  <!--
+    <a href="" class="text-year">
+   -->
+    线程安全
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">05-13</span>
+
+  
+  <a class="post-title" href="/2016/05/13/Java线程安全小结/">Java线程安全小结</a>
+
+
+</li>
+<li id="计算广告" class="item-category-name item-title item-title-0">
+  <!--
+    <a href="" class="text-year">
+   -->
+    计算广告
+    <span class="category-count">( 1 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">03-04</span>
+
+  
+  <a class="post-title" href="/2016/03/04/计算广告术语/">计算广告术语</a>
+
+
+</li>
+<li id="计算机网络" class="item-category-name item-title item-title-1">
+  <!--
+    <a href="" class="text-year">
+   -->
+    计算机网络
+    <span class="category-count">( 2 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">04-24</span>
+
+  
+  <a class="post-title" href="/2016/04/24/链路层/">TCP/IP协议详解学习笔记(二、链路层)</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">04-16</span>
+
+  
+  <a class="post-title" href="/2016/04/16/TCP-IP协议详解学习笔记（一、概述）/">TCP/IP协议详解学习笔记（一、概述）</a>
+
+
+</li>
+<li id="随笔" class="item-category-name item-title item-title-2">
+  <!--
+    <a href="" class="text-year">
+   -->
+    随笔
+    <span class="category-count">( 2 )</span>
+  <!--
+  </a>
+   -->
+</li>
+<li class="item-post item">
+  <span class="post-date">12-06</span>
+
+  
+  <a class="post-title" href="/2014/12/06/实习感想/">实习感想</a>
+
+
+</li>
+<li class="item-post item">
+  <span class="post-date">10-24</span>
+
+  
+  <a class="post-title" href="/2014/10/24/技术在于折腾/">技术在于折腾</a>
+
+
+</li>
+</ul>
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

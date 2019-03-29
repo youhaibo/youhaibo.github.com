@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>单机HBase搭建 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,HBase," />
+  
+
+  <meta name="description" content="一、HBase单机版搭建步骤：">
+<meta name="keywords" content="技术,HBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单机HBase搭建">
+<meta property="og:url" content="http://hbyou.me/2015/04/25/单机HBase搭建/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="一、HBase单机版搭建步骤：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单机HBase搭建">
+<meta name="twitter:description" content="一、HBase单机版搭建步骤：">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-单机HBase搭建" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">单机HBase搭建</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2015.04.25</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>一、HBase单机版搭建步骤：<br><a id="more"></a></p>
+<ol>
+<li>下载HBase，我这里选择的是hbase-0.94.27。</li>
+<li><p>解压HBase，命令 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hbase-0.94.27.tar.gz</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>配置HBase</p>
+<ul>
+<li><p>hbase-env.sh 配置java_home: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/home/jdk1.7.0_75/</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>hbase-size.xml 配置文件目录和zk目录：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">	&lt;value&gt;file:///home/hbase&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">	&lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;</span><br><span class="line">	&lt;value&gt;/home/zookeeper&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>这样一个最简单的HBase环境就搭建好了，hbase目录/bin/start-hbase.sh启动hbase。</p>
+<p>二、Java客户端程序连接HBase<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		Configuration conf = HBaseConfiguration.create();</span><br><span class="line">		<span class="comment">//安装HBase机器IP，单机模式下HBase使用自带的ZK，所以ZK地址即为HBase机器IP</span></span><br><span class="line">		String serverIp = <span class="string">"192.168.56.101"</span>;</span><br><span class="line">		conf.set(<span class="string">"hbase.zookeeper.quorum"</span>, serverIp);</span><br><span class="line">		<span class="comment">//zk的根node，默认为/hbase,可以在hbase-site.xml中配置</span></span><br><span class="line">		conf.set(<span class="string">"zookeeper.znode.parent"</span>, <span class="string">"/hbase"</span>);</span><br><span class="line">		<span class="comment">//zk连接端口号， 默认为2181，可以在hbase-site.xml中配置</span></span><br><span class="line">		conf.set(<span class="string">"hbase.zookeeper.property.clientPort"</span>, <span class="string">"2181"</span>);</span><br><span class="line">		HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);</span><br><span class="line">		<span class="comment">//获得test表的HTableDescriptor对象</span></span><br><span class="line">		HTableDescriptor tableDescriptor = admin.getTableDescriptor(Bytes</span><br><span class="line">				.toBytes(<span class="string">"test"</span>));</span><br><span class="line">		<span class="keyword">byte</span>[] name = tableDescriptor.getName();</span><br><span class="line">		<span class="comment">//输出表名</span></span><br><span class="line">		System.out.println(<span class="keyword">new</span> String(name));</span><br><span class="line">		HColumnDescriptor[] columnFamilies = tableDescriptor</span><br><span class="line">				.getColumnFamilies();</span><br><span class="line">		<span class="keyword">for</span> (HColumnDescriptor d : columnFamilies) &#123;</span><br><span class="line">			<span class="comment">//输出列族</span></span><br><span class="line">			System.out.println(d.getNameAsString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若上述程序成功执行表示，HBase搭建和连接成功。</p>
+<p>说明：</p>
+<pre><code>1. 客户端使用的jar包版本需要和HBase安装的版本保持一致，不然连接出现Exception：java.lang.IllegalArgumentException: Not a host:port pair: PBUF
+
+2. HBase安装过程中必须指定ZK的datadir，不然连接会出现Exception：java.net.ConnectException: Connection refused: no further information
+   而且，能够看到WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect,
+   表示ZK未正常启动。
+</code></pre>
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2015/04/17/快速排序算法/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/03/04/IDEA使用文档（mac-os-10-11-3）/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

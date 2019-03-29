@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>JVM笔记（一）：运行时数据区域 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JVM," />
+  
+
+  <meta name="description" content="分类Java虚拟机内存划分：  Program Counter Register Java Virtual Machine stack Heap Method Area Runtime Constant Pool Native Method Stack">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM笔记（一）：运行时数据区域">
+<meta property="og:url" content="http://hbyou.me/2018/07/23/JVM笔记（一）：运行时数据区域/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="分类Java虚拟机内存划分：  Program Counter Register Java Virtual Machine stack Heap Method Area Runtime Constant Pool Native Method Stack">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hbyou.me/images/20180723/jvm1.png">
+<meta property="og:image" content="http://hbyou.me/images/20180723/jvm1-2.png">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM笔记（一）：运行时数据区域">
+<meta name="twitter:description" content="分类Java虚拟机内存划分：  Program Counter Register Java Virtual Machine stack Heap Method Area Runtime Constant Pool Native Method Stack">
+<meta name="twitter:image" content="http://hbyou.me/images/20180723/jvm1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-JVM笔记（一）：运行时数据区域" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JVM笔记（一）：运行时数据区域</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.07.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>Java虚拟机内存划分：</p>
+<ul>
+<li>Program Counter Register</li>
+<li>Java Virtual Machine stack</li>
+<li>Heap</li>
+<li>Method Area</li>
+<li>Runtime Constant Pool</li>
+<li>Native Method Stack<a id="more"></a>
+</li>
+</ul>
+<p><img src="/images/20180723/jvm1.png" alt=""></p>
+<h1 id="各区域特性"><a href="#各区域特性" class="headerlink" title="各区域特性"></a>各区域特性</h1><h2 id="PC寄存器"><a href="#PC寄存器" class="headerlink" title="PC寄存器"></a>PC寄存器</h2><p>PC寄存器是一块较小的内存空间，他可以看作是当前线程所执行的字节码的行号指示器。字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令。分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖他来完成。</p>
+<p>如果线程正在执行一个Java方法，其值是正在执行的虚拟机字节码指令的地址；如过线程正在执行的是Native方法，其值为Undefined。</p>
+<p>PC寄存器是线程私有的，他的生命周期和线程相同，没有OOM。Java虚拟机规范（Java SE8版）中指出PC寄存器的容量至少应当能保存一个returnAddress类型的数据或者一个平台相关的本地指针的值。</p>
+<h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>Java虚拟机栈描述的是Java方法执行的内存模型，他被用于存储栈帧。其中栈帧中存储了局部变量表（存放基本数据类型、对象引用、returnAddress类型）、操作数栈、动态链接、方法出口等信息（局部变量和一些尚未算好的结果）。每一个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</p>
+<p>Java虚拟机栈可以被实现成固定大小，也允许根据计算动态扩展和收缩。</p>
+<p>Java虚拟机栈是线程私有的，生命周期和线程相同。会出现StackOverflowError和OutOfMemoryError异常。</p>
+<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2><p>本地方法栈与虚拟机栈发挥的作用非常类似，虚拟机栈为执行Java方法服务，本地方法栈为执行Native方法服务。</p>
+<h2 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h2><p>Java堆是虚拟机所管理内存中最大的一块，用于存放对象实例（对象实例和数组）。但随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化发生，所有的对象都分配在堆上渐渐变得不是那么“绝对”了。</p>
+<p>Java堆是垃圾收集器管理的主要区域，因此也被叫做GC堆。由于现在基本都采用分代收集算法，所以Java堆中还可以细分为：新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor空间等。</p>
+<p><img src="/images/20180723/jvm1-2.png" alt=""></p>
+<p>Java堆是所有线程共享的区域，可能会划分出多个线程私有的分配缓冲区（Thread Local Allocation Buffer,TLAB）。其不要求内存的物理连续，只要求逻辑上连续即可。会出现OOM异常。</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译后的代码等数据。方法区被所有线程共享，java虚拟机规范对方法区的限制非常宽松，不需要连续的内存和可以选择固定大小或者可扩展，可以不实现垃圾收集。会出现OOM异常。</p>
+<h2 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h2><p>运行时常量池是方法去的一部分，用于存放编译器生成的各种字面量和符号引用。运行时常量池具备动态性，运行期间也可以将新的常量放入池中，比如String的intern()方法。</p>
+<p>运行时常量池也会存在OOM异常。</p>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>直接内存并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域。但是这部分内存也频繁地被使用到。</p>
+<p>JDK1.4中新加入了NIO（New Inpit/Output）类，引入了一种基于通道（Channel）与缓冲区（Buffer）的I/O方式，他可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在Java堆和Native堆中来回复制数据。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/07/11/Flink-MAC本地模式搭建/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/07/29/JVM笔记（二）：HotSpot对象创建、布局和访问/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

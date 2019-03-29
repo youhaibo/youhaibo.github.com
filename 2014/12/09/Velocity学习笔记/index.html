@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Velocity学习笔记 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术," />
+  
+
+  <meta name="description" content="第一次接触Velocity，两个小时就能看完。但是看完一遍之后却没能记住多少，只能是心里有了个大概的印象。最近项目的需要，开始把前端HTML页面拆分成对应的vm模板，对Velocity的使用才更加了然于心。">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Velocity学习笔记">
+<meta property="og:url" content="http://hbyou.me/2014/12/09/Velocity学习笔记/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="第一次接触Velocity，两个小时就能看完。但是看完一遍之后却没能记住多少，只能是心里有了个大概的印象。最近项目的需要，开始把前端HTML页面拆分成对应的vm模板，对Velocity的使用才更加了然于心。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Velocity学习笔记">
+<meta name="twitter:description" content="第一次接触Velocity，两个小时就能看完。但是看完一遍之后却没能记住多少，只能是心里有了个大概的印象。最近项目的需要，开始把前端HTML页面拆分成对应的vm模板，对Velocity的使用才更加了然于心。">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Velocity学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Velocity学习笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2014.12.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>第一次接触Velocity，两个小时就能看完。但是看完一遍之后却没能记住多少，只能是心里有了个大概的印象。最近项目的需要，开始把前端HTML页面拆分成对应的vm模板，对Velocity的使用才更加了然于心。<br><a id="more"></a></p>
+<p>以前前端渲染常用的技术就是JSP，所以不禁会想Velocity和JSP的区别。Velocity和JSP非常的接近，都能完成动态页面的渲染。但是Velocity比JSP的功能更加强大而且能很好的弥补JSP的不足。JSP是HTML中嵌入JAVA代码，这样使得前端页面复杂性提高，而且不利于前端人员对页面的维护。因为很多前端工程师可能不太懂JSP，甚至对其完全不知道。这样使项目的可维护性降低。作为前端模板Velocity学习成本低，其简单的语法很容易上手，这样前端后台开发人员都能很快入手。而且利用Velocity可以实现更纯正的MVC模式。提高项目的可维护性。Velocity不仅可以渲染动态页面还可以作为一个工具类来生成源代码、报表、邮件模板等。</p>
+<p>Velocity Template Language(VTL)常用语法：</p>
+<ul>
+<li><p><strong>#+指示符 表示要做什么 eg. #set($a = “Velocity”) 给变量a赋值</strong></p>
+</li>
+<li><p><strong>$+变量名 表示要展示什么 eg. $a 展示a的值</strong></p>
+</li>
+<li><p><strong>单行注释##，多行注释#*  *#</strong></p>
+</li>
+<li><p><strong>展示变量的属性 eg.$var.value VM模板中的变量名（$后面的）必须和后台传递到前端的名称一致</strong></p>
+</li>
+<li><p><strong>属性查找顺序：eg. $var.value 的查找顺序是1，getvalue() 2，getValue() 3，get(“value”) 4，isValue()</strong></p>
+</li>
+<li><p><strong>引用正规格式${变量名} eg. ${var} 简洁格式为$var 下面这种情况必须要用正规格式 1，Jack is a $vicemaniac.2，Jack is a ${vice}maniac.</strong></p>
+</li>
+<li><p><strong>使用\转义 eg.#set($var = “value”) \$var 会直接显示$var，而不是value</strong></p>
+</li>
+<li><p><strong>条件判断:#if(…) … #elseif(…) …#else … #end</strong></p>
+</li>
+<li><p><strong>循环： #foreach($a in $ vars)  … #end</strong></p>
+</li>
+<li><p><strong>与或非：$a &amp;&amp; $b， $a || $b， !$a</strong></p>
+</li>
+<li><p><strong>宏调用：#macro指令让模板可以重用，或者可以理解为一个函数调用。eg. #macro(name, $param1_id, $param2_name) <br>           &lt; span class=”$param1)id”&gt;$param2_name&lt; /span&gt;<br> #end</strong></p>
+</li>
+</ul>
+<p>最后说说webx中vm模板引用control两种方式和这两种方式的区别：<br><strong>1，$control.setTemplate(“…”);</strong><br><strong>2，#parse(“…”)</strong><br>其中1中的方式control的模板里能够动态渲染，也就是后台对应的Java类会执行。而2的方式不会执行后台对应的Java类，也就是其页面中的动态内容不能得到渲染。  </p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2014/12/06/实习感想/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2015/04/09/字符串匹配算法之Sunday算法/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java主流日志工具介绍和使用 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,Log," />
+  
+
+  <meta name="description" content="概述本文的目的并不是详细介绍日志使用，而在于对现有主流日志系统的一个大致介绍，其目的是让我们更加合理的去使用日志，管理日志依赖关系。因为在开发过程中，我发现应用下面关于log的jar包非常的混乱，而这种混乱常常会带来jar包冲突、多份日志输出等问题，造成不必要的麻烦。比如你应用采用了log4j作为日志实现，但是你又通过间接依赖的方式引入了logback的包，这样开发者往往很难察觉，往往是出现了相应">
+<meta name="keywords" content="技术,Log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java主流日志工具介绍和使用">
+<meta property="og:url" content="http://hbyou.me/2016/06/18/Java主流日志工具介绍和使用/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="概述本文的目的并不是详细介绍日志使用，而在于对现有主流日志系统的一个大致介绍，其目的是让我们更加合理的去使用日志，管理日志依赖关系。因为在开发过程中，我发现应用下面关于log的jar包非常的混乱，而这种混乱常常会带来jar包冲突、多份日志输出等问题，造成不必要的麻烦。比如你应用采用了log4j作为日志实现，但是你又通过间接依赖的方式引入了logback的包，这样开发者往往很难察觉，往往是出现了相应">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hbyou.me/images/20160618/a1.png">
+<meta property="og:image" content="http://hbyou.me/images/20160618/a2.png">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java主流日志工具介绍和使用">
+<meta name="twitter:description" content="概述本文的目的并不是详细介绍日志使用，而在于对现有主流日志系统的一个大致介绍，其目的是让我们更加合理的去使用日志，管理日志依赖关系。因为在开发过程中，我发现应用下面关于log的jar包非常的混乱，而这种混乱常常会带来jar包冲突、多份日志输出等问题，造成不必要的麻烦。比如你应用采用了log4j作为日志实现，但是你又通过间接依赖的方式引入了logback的包，这样开发者往往很难察觉，往往是出现了相应">
+<meta name="twitter:image" content="http://hbyou.me/images/20160618/a1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Java主流日志工具介绍和使用" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Java主流日志工具介绍和使用</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.06.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文的目的并不是详细介绍日志使用，而在于对现有主流日志系统的一个大致介绍，其目的是让我们更加合理的去使用日志，管理日志依赖关系。因为在开发过程中，我发现应用下面关于log的jar包非常的混乱，而这种混乱常常会带来jar包冲突、多份日志输出等问题，造成不必要的麻烦。比如你应用采用了log4j作为日志实现，但是你又通过间接依赖的方式引入了logback的包，这样开发者往往很难察觉，往往是出现了相应的异常现象才排查出log冲突的问题。</p>
+<p>本文会先介绍现在主流日志框架，然后提出一个一些应用日志的规范，如果可行度很高，后续会给出更为严格的检测机制，帮助开发者去发现问题，防范于未然。</p>
+<a id="more"></a>
+<h1 id="日志框架的历史"><a href="#日志框架的历史" class="headerlink" title="日志框架的历史"></a>日志框架的历史</h1><p>在Java开发过程中可用的日志工具非常之多，比如：</p>
+<ul>
+<li>Apache Commons Logging(Jakarta Commons Logging，JCL)</li>
+<li>Simple Logging Facade for Java (SLF4J)</li>
+<li>Apache Log4j(Log4j2)</li>
+<li>Java Logging API（JUL）</li>
+<li>Logback</li>
+<li>tinylog</li>
+</ul>
+<p>在这些日志组件当中，最早得到广泛应用的是log4j，成为了Java日志的事实上的标准，现在可以看到很多应用都是依赖于log4j的日志实现。然而当时Sun公司在jdk1.4中增加了JUL(java.util.logging)，企图对抗log4j，于是造成了混乱，当然此时也有其它的一些日志框架的出现，如simplelog等，简直是乱上加乱。</p>
+<p>为了解决这种混乱Commons Logging出现了，他只提供日志的接口，而具体的实现则在运行过程中动态寻找。这样在代码中全部使用Commons Logging的编程接口，而具体日志实现则在外部配置中体现。<br>这样还有一个好处，由于应用日志并不依赖具体的实现，那么应用日志的实现则可以轻松的切换。所以现在也能看到很多应用基于Commons Logging＋Log4j的搭配。</p>
+<p>但是呢log4j的作者觉得Commons Loggin不够优秀（缺点在下文中介绍），于是自己实现了一套更为优雅的，这个就是SLF4J，并且还亲自实现了一个日志实现logback。那么现在关于log的局面就更为混乱了。为了让之前使用Commons Logging和JUL的能够很好的转到SLF4J的体系中来，log4j的作者又对其他的日志工具做了桥接……后来该作者又重写了log4j，这就是现在的log4j2，同时log4j2也加进了SLF4J体系中……（ps：这人确实牛逼！）</p>
+<h1 id="主流日志工具介绍"><a href="#主流日志工具介绍" class="headerlink" title="主流日志工具介绍"></a>主流日志工具介绍</h1><h2 id="Commons-logging"><a href="#Commons-logging" class="headerlink" title="Commons-logging"></a>Commons-logging</h2><p>Commons-logging是Apache提供的一个日志抽象，他提供一组通用的日志接口。应用自由选择第三方日志实现，像JUL、log4j等。这样的好处是代码依赖日志抽象接口，并不是具体的日志实现，这样在更换第三方库时带来了很大便利。</p>
+<p>工作原理：<br>1、查找名为org.apache.commons.logging.Log的factory属性配置（可以是java代码配置，也可以是commons-logging.properties配置）；<br>2、查找名为org.apache.commons.logging.Log的系统属性；<br>3、上述配置不存在则classpath下是否有Log4j日志系统，如有则使用相应的包装类；<br>3、如果系统运行在JDK 1.4系统上，则使用Jdk14Logger；<br>4、上述都没有则使用SimpleLog。</p>
+<p>所以如果使用commons-logging＋log4j的组合只需要在classpath中加入log4j.xml配置即可。commons-logging的动态查找过程是在程序运行时自动完成的。他使用ClassLoader来寻找和载入底层日志库，所以像OSGI这样的框架无法正常工作，因为OSGI的不同插件使用自己的ClassLoader。</p>
+<h2 id="SLF4J-Simple-logging-facade-for-Java"><a href="#SLF4J-Simple-logging-facade-for-Java" class="headerlink" title="SLF4J(Simple logging facade for Java)"></a>SLF4J(Simple logging facade for Java)</h2><p>SLF4J类似于commons-logging，他也是日志抽象。和commons-logging动态查找不同slf4j是静态绑定，他是在编译时就绑定真正的log实现。同时slf4j还提供桥接器可以将基于commons-loggging、jul的日志重定向到slf4j。比如程序中以前使用的commong-logging，那么你可以通过倒入jcl-over-slf4j包来讲日志重定向到slf4j。</p>
+<h3 id="SLF4J与各种日志实现的使用"><a href="#SLF4J与各种日志实现的使用" class="headerlink" title="SLF4J与各种日志实现的使用"></a>SLF4J与各种日志实现的使用</h3><p><img src="/images/20160618/a1.png" alt=""></p>
+<h3 id="SLF4J桥接"><a href="#SLF4J桥接" class="headerlink" title="SLF4J桥接"></a>SLF4J桥接</h3><p><img src="/images/20160618/a2.png" alt=""></p>
+<h2 id="Log4j"><a href="#Log4j" class="headerlink" title="Log4j"></a>Log4j</h2><p>log4j是Apache的开源日志框架,其最新版本是在2012年5月更新的1.2.17版本。他的2.0版本log4j2在其基础之上进行了重写，最新版本为2016年5月发布的2.6版本。log4j2插件式的架构、强大的配置功能、锁的优化、java8支持等特性都是非常吸引人的。如何升级请参考<a href="http://logging.apache.org/log4j/2.x/manual/migration.html" target="_blank" rel="noopener">文档</a></p>
+<h2 id="Logback"><a href="#Logback" class="headerlink" title="Logback"></a>Logback</h2><p>Logback是由log4j创始人设计的又一个开源日志组件。当前分成三个模块：logback-core,logback- classic和logback-access。logback-core是其它两个模块的基础模块。logback-classic是log4j的一个改良版本。此外logback-classic完整实现SLF4J API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging。logback-access访问模块与Servlet容器集成提供通过Http来访问日志的功能。Logback是要与SLF4J结合起来用。</p>
+<p>#最佳实践</p>
+<h2 id="二方库使用"><a href="#二方库使用" class="headerlink" title="二方库使用"></a>二方库使用</h2><p>二房库中建议不要绑定任何的日志实现，统一使用日志抽象（commons-logging、slf4j）。这里强烈建议使用slf4j。</p>
+<p>包依赖如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 除此之外不要依赖别的log包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="应用使用"><a href="#应用使用" class="headerlink" title="应用使用"></a>应用使用</h2><h3 id="新应用"><a href="#新应用" class="headerlink" title="新应用"></a>新应用</h3><h4 id="slf4j-logback"><a href="#slf4j-logback" class="headerlink" title="slf4j+logback"></a>slf4j+logback</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- logback-classic包含logback-core依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="slf4j-log4j"><a href="#slf4j-log4j" class="headerlink" title="slf4j+log4j"></a>slf4j+log4j</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--slf4j-log4j12包含了log4j依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>###老应用<br>老应用则没有改变日志的必要，因为会有开发成本。但是开发需要保证三点：<br>1、应用依赖中同一个log包不能出现多个版本；<br>2、日志实现框架必须唯一，可以log4j、logback等，但是不能出现既有log4j又有logback的情况；<br>3、日志桥接不要出现循环重定向，比如你加入了jcl-over-slf4j.jar之后又加入了slf4j-jcl.jar。</p>
+<p>满足上述两点我感觉关于日志的问题应该会少很多。</p>
+<h1 id="检查机制"><a href="#检查机制" class="headerlink" title="检查机制"></a>检查机制</h1><p>很多时候对于间接依赖开发者也不知晓应用存在多个日志实现包。所以采用有效的依赖检查机制很有必要。</p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>通过maven插件的形式，完成编译期依赖检查，通过开发者配置日志实现，检查应用中对日志的依赖。如发现多种日志实现包依赖则报错，这样来提醒开发者解决问题。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://logback.qos.ch/" target="_blank" rel="noopener">Logback</a><br><a href="http://logging.apache.org/log4j/2.x/" target="_blank" rel="noopener">Log4j</a><br><a href="http://www.slf4j.org/" target="_blank" rel="noopener">SLF4J</a><br><a href="https://commons.apache.org/proper/commons-logging/" target="_blank" rel="noopener">Commons Logging</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/06/04/ARP-RARP协议/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/02/25/Leetcode-1-Two-Sum/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

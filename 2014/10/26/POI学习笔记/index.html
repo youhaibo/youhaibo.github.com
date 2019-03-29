@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>POI学习笔记 | youqi&#39;s blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="技术,POI," />
+  
+
+  <meta name="description" content="最近项目中遇到大量Excel操作，特别学习了下POI文档。先做下总结也方便以后复习。">
+<meta name="keywords" content="技术,POI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POI学习笔记">
+<meta property="og:url" content="http://hbyou.me/2014/10/26/POI学习笔记/index.html">
+<meta property="og:site_name" content="youqi&#39;s blog">
+<meta property="og:description" content="最近项目中遇到大量Excel操作，特别学习了下POI文档。先做下总结也方便以后复习。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-29T02:40:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POI学习笔记">
+<meta name="twitter:description" content="最近项目中遇到大量Excel操作，特别学习了下POI文档。先做下总结也方便以后复习。">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">导航</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-POI学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">POI学习笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2014.10.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>尤淇</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/category/Java/">Java</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>最近项目中遇到大量Excel操作，特别学习了下POI文档。先做下总结也方便以后复习。<br><a id="more"></a><br>HSSF和XSSF是POI项目对Excel文件操作的两种实现，其中HSSF支持Excel 97(-2007)，XSSF支持Excel 2007。而且使用这两个所导入的jar包是不一样的。如果导入poi-3.10.1.jar是HSSF实现，导入poi-ooxml-3.10.1.jar则是XSSF实现。XSSF比起HSSF拥有更简单的操作，但是内存消耗更大，在POI 3.8bate3之后POI提供了一个更低内存消耗的SXSSF实现。</p>
+<p>这里我主要是用到的HSSF实现，有兴趣的可以学习下文档的其他部分。  </p>
+<ul>
+<li><p>创建  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">//new Worlbook</span><br><span class="line">Workbook wb = new HSSFWorkbook();  </span><br><span class="line">fileOut = new FileOutputStream(&quot;workbook.xls&quot;);  </span><br><span class="line">//new Sheet</span><br><span class="line">//命名中不要包含 0x0000 0x0003 : \ * ? / [ ]</span><br><span class="line">//可以用org.apache.poi.ss.util.WorkbookUtil类的createSafeSheetName(String nameProposal)</span><br><span class="line">//创建一个安全的名字</span><br><span class="line">Sheet sheet = wb.createSheet(&quot;new sheet&quot;);</span><br><span class="line"></span><br><span class="line">//new Cell</span><br><span class="line">// Create a row and put some cells in it. Rows are 0 based.</span><br><span class="line">Row row = sheet.createRow((short)0);</span><br><span class="line">//</span><br><span class="line">CreationHelper createHelper = wb.getCreationHelper();</span><br><span class="line">// Create a cell and put a value in it.</span><br><span class="line">Cell cell = row.createCell(0);</span><br><span class="line">cell.setCellValue(1);</span><br><span class="line"></span><br><span class="line">// Or do it on one line.</span><br><span class="line">row.createCell(1).setCellValue(1.2);</span><br><span class="line">row.createCell(2).setCellValue(createHelper.createRichTextString(&quot;This is a string&quot;));</span><br><span class="line">row.createCell(3).setCellValue(true);</span><br><span class="line"></span><br><span class="line">//new Date Cells</span><br><span class="line">CellStyle cellStyle = wb.createCellStyle();</span><br><span class="line">cellStyle.setDataFormat(createHelper.createDataFormat().getFormat(&quot;m/d/yy h:mm&quot;));</span><br><span class="line">Cell dateCell = row.createCell(4);</span><br><span class="line">dateCell.setCellValue(new Date());</span><br><span class="line">dateCell.setCellStyle(cellStyle);  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wb.write(fileOut);</span><br><span class="line">fileOut.close();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//这里有很多方法得到一个Excel的对象</span><br><span class="line">//1,WorkbookFactory.create(new FileInputStream(&quot;workbook.xls&quot;))</span><br><span class="line"></span><br><span class="line">//2,NPOIFSFileSytem fs = new NPOIFSFileSystem(new File(&quot;workbook.xls&quot;));</span><br><span class="line">//HSSFWorkbook wb = new HSSFWorkbook(fs.getRoot(),false);</span><br><span class="line">////上面方式2需要操作完成之后关闭文件</span><br><span class="line">Workbook wb = WorkbookFactory.create(new File(&quot;workbook.xls&quot;));</span><br><span class="line"></span><br><span class="line">//得到第1页</span><br><span class="line">Sheet sheet = wb.getSheetAt(0);</span><br><span class="line">//遍历所有的row</span><br><span class="line">for (Row row : sheet) &#123;</span><br><span class="line">    for (Cell cell : row) &#123;</span><br><span class="line">        switch (cell.getCellType()) &#123;</span><br><span class="line">            case Cell.CELL_TYPE_STRING://字符串</span><br><span class="line">                System.out.println(cell.getRichStringCellValue().getString());</span><br><span class="line">                break;</span><br><span class="line">            case Cell.CELL_TYPE_NUMERIC:</span><br><span class="line">                //日期类型</span><br><span class="line">                if (DateUtil.isCellDateFormatted(cell)) &#123;</span><br><span class="line">                    System.out.println(cell.getDateCellValue());</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    //数字类型</span><br><span class="line">                    System.out.println(cell.getNumericCellValue());</span><br><span class="line">                &#125;</span><br><span class="line">                break;</span><br><span class="line">            case Cell.CELL_TYPE_BOOLEAN:</span><br><span class="line">                System.out.println(cell.getBooleanCellValue());</span><br><span class="line">                break;</span><br><span class="line">            case Cell.CELL_TYPE_FORMULA:</span><br><span class="line">                //表达式类型</span><br><span class="line">                System.out.println(cell.getCellFormula());</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2014/10/24/技术在于折腾/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2014/12/06/实习感想/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
